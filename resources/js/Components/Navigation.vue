@@ -148,7 +148,16 @@ import { Input } from "@/Components/ui/input";
                     <DropdownMenuItem>Settings</DropdownMenuItem>
                     <DropdownMenuItem>Support</DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                    <DropdownMenuItem>
+                        <Link
+                            :href="route('logout')"
+                            method="post"
+                            as="button"
+                            type="button"
+                        >
+                            Logout
+                        </Link>
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>

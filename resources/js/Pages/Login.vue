@@ -2,6 +2,8 @@
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
+
+defineOptions({ layout: null });
 </script>
 
 <template>

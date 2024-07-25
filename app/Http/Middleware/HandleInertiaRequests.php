@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -17,7 +18,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      */
-    public function version(Request $request): string|null
+    public function version(Request $request): ?string
     {
         return parent::version($request);
     }
@@ -31,9 +32,15 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'auth' => [
-                'user' => $request->user(),
-            ],
+            'auth.user' => fn () => $request->user()?->only('id', 'name'),
+            'locale' => fn () => session('locale', 'en'),
+            'languages' => fn () => cache()->get(
+                'allLanguages',
+                cache()->remember('allLanguages', (60 * 60 * 24), function () {
+                    return Language::pluck('name', 'locale')->toArray();
+                })
+            ),
+            'permissions' => json_decode(auth()->check() ? auth()->user()->jsPermissions() : '{}', true),
         ];
     }
 }

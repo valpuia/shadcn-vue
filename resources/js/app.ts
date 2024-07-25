@@ -6,6 +6,7 @@ import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
+import LaravelPermissionToVueJS from "laravel-permission-to-vuejs";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
@@ -29,6 +30,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(LaravelPermissionToVueJS)
             .component("Link", Link)
             .component("Head", Head)
             .mount(el);

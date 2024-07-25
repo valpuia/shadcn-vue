@@ -34,7 +34,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth.user' => fn () => $request->user()?->only('id', 'name'),
             'locale' => fn () => session('locale', 'en'),
-            'languages' => fn () => cache()->get(
+            'allLanguages' => fn () => cache()->get(
                 'allLanguages',
                 cache()->remember('allLanguages', (60 * 60 * 24), function () {
                     return Language::pluck('name', 'locale')->toArray();

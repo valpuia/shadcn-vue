@@ -8,6 +8,10 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import LaravelPermissionToVueJS from "laravel-permission-to-vuejs";
 
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
 createInertiaApp({
@@ -30,6 +34,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(dayjs)
             .use(LaravelPermissionToVueJS)
             .component("Link", Link)
             .component("Head", Head)

@@ -9,65 +9,43 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
-import {
-    Activity,
-    ArrowUpRight,
-    CircleUser,
-    CreditCard,
-    DollarSign,
-    Menu,
-    Package2,
-    Search,
-    Users,
-} from "lucide-vue-next";
+import { CircleUser, Menu, Package2, Search } from "lucide-vue-next";
 import { Input } from "@/Components/ui/input";
+import NavLink from "@/Components/NavLink.vue";
+import { ref } from "vue";
+import { router } from "@inertiajs/vue3";
+
+const currentRoute = ref(null);
+
+router.on("navigate", () => {
+    currentRoute.value = route().current();
+});
 </script>
 
 <template>
     <header
-        class="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6"
+        :key="currentRoute"
+        class="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-0 container"
     >
-        <nav
+        <div
             class="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
         >
-            <a
-                href="#"
-                class="flex items-center gap-2 text-lg font-semibold md:text-base"
-            >
-                <Package2 class="h-6 w-6" />
-                <span class="sr-only">Acme Inc</span>
-            </a>
-            <a
-                href="#"
-                class="text-foreground transition-colors hover:text-foreground"
+            Logo
+
+            <NavLink
+                :href="route('dashboard')"
+                :active="route().current('dashboard')"
             >
                 Dashboard
-            </a>
-            <a
-                href="#"
-                class="text-muted-foreground transition-colors hover:text-foreground"
+            </NavLink>
+
+            <NavLink
+                :href="route('languages.index')"
+                :active="route().current('languages.*')"
             >
-                Orders
-            </a>
-            <a
-                href="#"
-                class="text-muted-foreground transition-colors hover:text-foreground"
-            >
-                Products
-            </a>
-            <a
-                href="#"
-                class="text-muted-foreground transition-colors hover:text-foreground"
-            >
-                Customers
-            </a>
-            <a
-                href="#"
-                class="text-muted-foreground transition-colors hover:text-foreground"
-            >
-                Analytics
-            </a>
-        </nav>
+                Languages
+            </NavLink>
+        </div>
         <Sheet>
             <SheetTrigger as-child>
                 <Button

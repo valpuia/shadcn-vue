@@ -4,5 +4,8 @@ import Navigation from "@/Components/Navigation.vue";
 
 <template>
     <Navigation />
-    <slot />
+
+    <main class="container mx-auto py-8 px-4 md:px-0">
+        <slot />
+    </main>
 </template>
